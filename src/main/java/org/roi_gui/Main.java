@@ -54,7 +54,7 @@ public class Main extends JFrame{
         //add the table to the frame
         this.add(new JScrollPane(table));
         table.setDefaultEditor(Object.class, null);
-        this.setTitle("Table Example");
+        this.setTitle("Simple ROI");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
 
