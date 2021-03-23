@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="roi.jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/roi_jar</output-path>
+    <root id="archive" name="playing_around.jar">
+      <element id="module-output" name="ROI-gui" />
+      <element id="dir-copy" path="$PROJECT_DIR$/target/classes" />
+    </root>
+  </artifact>
+</component>
