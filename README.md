@@ -4,6 +4,10 @@ A simple GUI for determining simple ROI
 ## RUN:
 
 
+```
+java -jar roi_gui<version>.jar
+```
+
 
 ## Package to JAR file
 
