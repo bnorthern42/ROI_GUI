@@ -2,7 +2,9 @@ package org.roi_gui;
 import java.awt.*;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.util.Scanner;  // Import the Scanner class
+import org.roi_gui.Background.*;
 
 public class Main extends JFrame{
 
@@ -39,18 +41,28 @@ public class Main extends JFrame{
             String temp = String.format("%.2f", arrs[r]);
                 data[r][0] = temp;//arrs[r];
                 double roiv = roi(arrs[r],starting);
-                data[r][1] = String.format("%.2f",roiv);
+                data[r][1] = String.format("%.8f",roiv);
                 double gain = roiv-starting;
-            data[r][2] = String.format("%.2f",gain);
+            data[r][2] = String.format("%.8f",gain);
 
             System.out.println(data[r][0] + " :: " + data[r][1] );
 
               // 0.0, String.format("%.2f",roi(0.0,starting)) }
         }
    //      //create table with data
-        JTable table = new JTable(data, columns);
-        table.setFont(new Font("Serif", Font.BOLD, 18));
 
+
+
+
+
+        JTable table = new JTable(data, columns);
+       //  table.getDefaultRenderer(Object.class);
+       //  table.setBackground(new Color(0,0,0,0));
+      //  table.setGridColor(Color.CYAN);
+      //  table.setForeground(Color.RED);
+      //  this.setUndecorated(true);
+                table.setFont(new Font("Serif", Font.BOLD, 18));
+        this.setAlwaysOnTop(true);
         //add the table to the frame
         this.add(new JScrollPane(table));
         table.setDefaultEditor(Object.class, null);
