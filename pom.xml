@@ -6,7 +6,7 @@
 
     <groupId>org.roi_gui</groupId>
     <artifactId>roi_gui</artifactId>
-    <version>1.00.001</version>
+    <version>1.01.000</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
