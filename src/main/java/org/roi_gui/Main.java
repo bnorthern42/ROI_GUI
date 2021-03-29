@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.util.Scanner;  // Import the Scanner class
 
@@ -12,9 +13,15 @@ import java.util.Scanner;  // Import the Scanner class
 public class Main extends JFrame implements ActionListener {
     JToolBar tb;
    private JButton submit;
+   private JButton clear;
    private JTextField textField;
    private double start = 0.0;
    private JTable table;
+   private String[] columns = new String[] {
+            "% gain", "sell price","$ gain"
+    };
+   private boolean has_table;
+   private TableColumnModel columnModel;
 
 
     private Double roi(Double rate, Double start){
@@ -54,26 +61,18 @@ public class Main extends JFrame implements ActionListener {
 
 
     public Main(Double starting) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-     //   UIManager.setLookAndFeel("Nimbus");
-        //headers for the table
-
-
-
-
-
-
-              // 0.0, String.format("%.2f",roi(0.0,starting)) }
-
-   //      //create table with data
-
 
         tb = new JToolBar();
         submit = new JButton("Submit");
-        textField= new JTextField(15);
+        clear  = new JButton("Clear");
+        textField= new JTextField(8);
         submit.addActionListener(this);
+        clear.addActionListener(this);
         tb.add(textField);
         tb.addSeparator();
         tb.add(submit);
+        tb.addSeparator();
+        tb.add(clear);
 
 
         this.add(tb,BorderLayout.NORTH);
@@ -134,32 +133,52 @@ public class Main extends JFrame implements ActionListener {
 
 
         if (e.getSource() == submit){
-            this.setVisible(false);
+            this.setAlwaysOnTop(true);
+            if (has_table == true) {
+                this.remove(this.table);
+                table = null;
+                columnModel = null;
+                this.revalidate();
+                this.repaint();
+                this.setVisible(false);
+
+
+            }
 
 
            start = Double.parseDouble(textField.getText());
-            String[] columns = new String[] {
-                    "% gain", "sell price","$ gain"
-            };
+            System.out.println(start);
+
             Object[][] data = set_data(start);//
             table = new JTable(data, columns);
-            TableColumnModel columnModel = table.getColumnModel();
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+           columnModel = table.getColumnModel();
+
             columnModel.getColumn(0).setPreferredWidth(60);
             columnModel.getColumn(1).setPreferredWidth(95);
             columnModel.getColumn(2).setPreferredWidth(90);
 
 
             table.setFont(new Font("Serif", Font.BOLD, 18));
-            this.setAlwaysOnTop(true);
+
             //add the table to the frame
             this.add(new JScrollPane(table));
+
             table.setDefaultEditor(Object.class, null);
             this.pack();
             this.setVisible(true);
+            has_table = true;
 
 
+        }
+        if (e.getSource() == clear && has_table == true){
+            System.out.println("hello");
+            this.setVisible(false);
+             this.remove(table);
 
+            this.revalidate();
+            this.repaint();
+
+            this.setVisible(true);
         }
 
     }
